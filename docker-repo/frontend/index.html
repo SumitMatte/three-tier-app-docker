@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Web Page</title>
+  </head>
+  <body>
+    <h1>Hello, World!</h1>
+    
+    <div id="todos"></div>
+
+    <script>
+      fetch("http://13.127.230.199:5000/")
+        .then((response) => response.json())
+        .then((data) => {
+          const todos = document.getElementById("todos");
+
+          data?.forEach((item, index) => {
+            const todo = document.createElement("h2");
+            todo.textContent = item._id + ". " + item.todo;
+            todos.appendChild(todo);
+          });
+        })
+        .catch((error) => {
+          console.log("Error: ", error);
+        });
+    </script>
+
+      <form action="/submit" method="post">
+  <div>
+    <label for="textbox1">Text Box 1:</label>
+    <input type="text" id="textbox1" name="textbox1">
+  </div>
+  <div>
+    <label for="textbox2">Text Box 2:</label>
+    <input type="text" id="textbox2" name="textbox2">
+  </div>
+  <button type="submit">Submit</button>
+</form>
+
+
+  </body>
+</html>
